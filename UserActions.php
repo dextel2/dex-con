@@ -40,16 +40,19 @@ class UserActions
 	 */
 	function userRegistration($email, $password, $confirmPassword)
 	{
-		if ($email == null) {
-			return 'Email Address Cannot be Empty';
+		if ($email == null && empty($email)) {
+            return false;
+            exit();
 		}
 
 		if ($password == null) {
-			return 'Password Cannot Be Empty';
+            return false;
+            exit();
 		}
 
 		if ($confirmPassword == null) {
-			return 'You cannot leave confirm password Empty';
+            return false;
+            exit();
 		}
 
 		if ($email != null && $password != null && $confirmPassword != null) {
@@ -58,13 +61,15 @@ class UserActions
 
 			if ($password == $confirmPassword) {
 				/**
-				 * Check if email is already in the database
+				 * dependency isUserRegistered()
 				 * Hash password here an run insert query
+                 * TODO: Run insert query here
 				 */
 				return true;
 			}
 			else {
-				return 'Password and confirm password must match';
+                return false;
+                //Password and confirm password must match
 				exit();
 			}
 		}
@@ -110,7 +115,16 @@ class UserActions
 		}
 
 		return true;
-	}
+    }
+    /**
+     * Function for basic field validation (present and neither empty nor only white space
+     * @author Michael Haren
+     * @Source Stackoverflow
+     * Not sure what this function does..still keeping this for future use maybe
+     */
+    function IsNullOrEmptyString($question){
+        return (!isset($question) || trim($question)==='');
+    }
 
 	/**
 	 * This functions checks in the database if the user is already registered with
@@ -148,7 +162,7 @@ class UserActions
 	function isUserActive($email)
 	{
 		try {
-			$userCheck = $this->connection->prepare("SELECT `EMAIL` from student_data WHERE `EMAIL` = ? AND `isActive` = 1");
+			$userCheck = $this->connection->prepare("SELECT `EMAIL`,`isActive` from student_data WHERE `EMAIL` = ? AND `isActive` = 1");
 			$userCheck->bindValue(1, $email);
 			$userCheck->execute();
 			if ($userCheck->rowCount() > 0) {
@@ -158,7 +172,6 @@ class UserActions
 				return false;
 			}
 		}
-
 		catch(Exception $e) {
 		}
 	}
@@ -190,7 +203,7 @@ class UserActions
 
 	/**
 	 * Debug Function
-	 * This function will return all records in the table
+	 * This function will connect to database and check if the query is working or not
 	 */
 	function debugging()
 	{
