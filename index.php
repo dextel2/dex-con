@@ -33,4 +33,6 @@
   /**
    * Proper usage of a function which returns a whole dataset from table
    */
-  print_r ($User->debugging()[0]['name']);
+  //print_r ($User->debugging()[0]['name']);
+
+  echo '<br>'.$User->sendAuthEmail($email);

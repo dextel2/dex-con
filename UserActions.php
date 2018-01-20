@@ -1,4 +1,10 @@
 <?php
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
+
+require 'PHPMailer/src/Exception.php';
+require 'PHPMailer/src/PHPMailer.php';
+require 'PHPMailer/src/SMTP.php';
 /**
  * This class contains set of methods which are related to users
  * This contains methods such as
@@ -6,6 +12,10 @@
  * 2 User Registrations
  * 3 User Login
  * 4 Validate Email
+ * 5 check if user is already registered or not
+ * 
+ * This class also has methods which are not being used,
+ * I am keeping those methods because they might be useful in future
  */
 class UserActions
 
@@ -199,6 +209,45 @@ class UserActions
 		catch(Exception $e) {
 			return false;
 		}
+	}
+
+	/**
+	 * TODO: Send Authenticate email to the user
+	 */
+	function sendAuthEmail($email) {
+		try {
+			$mail = new PHPMailer(true);
+			$mail->isSMTP();
+			$mail->SMTPDebug = 4; //SMTP Debug 
+			$mail->Host = "smtp.gmail.com";
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = 587;
+			$mail->SMTPAuth = true;
+			$mail->Username = 'mr.karanke@gmail.com';
+			$mail->Password = '**************';
+
+			//Recipients
+			$mail->setFrom('mr.karanke@gmail.com');
+			$mail->addAddress('dex.papa@gmail.com','Yash Karanke');     // Add a recipient
+
+
+			 //Content
+			 $mail->isHTML(true);                                  // Set email format to HTML
+			 $mail->Subject = 'Authentication Email';
+			 $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+		 
+			 if($mail->send()){
+				return true;
+			 }
+			 else {
+				 return false;
+				 exit();
+			 }
+		}
+		catch (Exception $e) {
+			return $mail->ErrorInfo;
+		}
+
 	}
 
 	/**
