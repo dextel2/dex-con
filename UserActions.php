@@ -217,19 +217,28 @@ class UserActions
 	function sendAuthEmail($email) {
 		try {
 			$mail = new PHPMailer(true);
+			$mail->SMTPDebug = 4; //SMTP Debug
 			$mail->isSMTP();
-			$mail->SMTPDebug = 4; //SMTP Debug 
 			$mail->Host = "smtp.gmail.com";
-			$mail->SMTPSecure = 'tls';
-			$mail->Port = 587;
 			$mail->SMTPAuth = true;
-			$mail->Username = 'mr.karanke@gmail.com';
-			$mail->Password = '**************';
-
+			$mail->Username = 'karanke.development@gmail.com';
+			$mail->Password = 'yourpasswordhere';
+			$mail->SMTPSecure = 'tls';
+			$mail->Port = '587';
+			/**
+			 * SMTPOptions work-around by @author : Synchro
+			 */
+			$mail->SMTPOptions = array(
+				'ssl' => array(
+					'verify_peer' => false,
+					'verify_peer_name' => false,
+					'allow_self_signed' => true
+				)
+			);
 			//Recipients
-			$mail->setFrom('mr.karanke@gmail.com');
+			$mail->setFrom('no-reply@confirmation.com');
 			$mail->addAddress('dex.papa@gmail.com','Yash Karanke');     // Add a recipient
-
+			$mail->addReplyTo('no-reply@confirmation.com');
 
 			 //Content
 			 $mail->isHTML(true);                                  // Set email format to HTML
