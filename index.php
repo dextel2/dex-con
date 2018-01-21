@@ -80,6 +80,7 @@ if (isset($_POST['submit'])) {
  * ---------------------------------------
  */
 
+ /* 
  $crud = new UserActions();
  $crud->databaseConnection('localhost','root','','windowsDB');
 
@@ -95,7 +96,7 @@ if (isset($_POST['submit'])) {
     echo 'failure';
   }
  }
-
+*/
 ?>
 
 <!DOCTYPE html>
