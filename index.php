@@ -11,6 +11,14 @@
    * then do userLogin()
    * 
    */
+/**
+ * --------------------------------
+ * Block - 1 Testing individually
+ * all the functions , mostly 
+ * non-database functions
+ * --------------------------------
+ */
+
   $User = new UserActions;
   $User->databaseConnection('localhost','root','','admission2018');
   $email='dex.papa@gmail.com';
