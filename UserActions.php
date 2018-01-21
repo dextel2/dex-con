@@ -213,20 +213,23 @@ class UserActions
 
 	/**
 	 * TODO: Send Authenticate email to the user
+	 * Currently sending only email
 	 */
-	function sendAuthEmail($email) {
+	function sendAuthEmail($email,$mailBody) {
 		try {
 			$mail = new PHPMailer(true);
-			$mail->SMTPDebug = 4; //SMTP Debug
+			$mail->SMTPDebug = 0; //SMTP Debug
 			$mail->isSMTP();
 			$mail->Host = "smtp.gmail.com";
 			$mail->SMTPAuth = true;
 			$mail->Username = 'karanke.development@gmail.com';
-			$mail->Password = 'yourpasswordhere';
+			$mail->Password = 'Dexter!1';
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = '587';
 			/**
 			 * SMTPOptions work-around by @author : Synchro
+			 * This setting should removed on server and 
+			 * mailing should be working on the server
 			 */
 			$mail->SMTPOptions = array(
 				'ssl' => array(
@@ -236,14 +239,14 @@ class UserActions
 				)
 			);
 			//Recipients
-			$mail->setFrom('no-reply@confirmation.com');
-			$mail->addAddress('dex.papa@gmail.com','Yash Karanke');     // Add a recipient
+			$mail->setFrom('no-reply@confirmation.com', 'Do Not Reply');
+			$mail->addAddress($email,'Yash Karanke');     // Add a recipient
 			$mail->addReplyTo('no-reply@confirmation.com');
 
 			 //Content
 			 $mail->isHTML(true);                                  // Set email format to HTML
 			 $mail->Subject = 'Authentication Email';
-			 $mail->Body    = 'This is the HTML message body <b>in bold!</b>';
+			 $mail->Body    = $mailBody;
 		 
 			 if($mail->send()){
 				return true;
