@@ -73,8 +73,12 @@ class UserActions
 				/**
 				 * dependency isUserRegistered()
 				 * Hash password here an run insert query
+				 * insert is working properly
                  * TODO: Run insert query here
 				 */
+
+				$registerData = $this->connection->prepare("INSERT INTO `win` VALUES ('$email','$password')");
+				$registerData->execute();
 				return true;
 			}
 			else {
@@ -149,7 +153,7 @@ class UserActions
                 return false;
                 exit();
             }
-			$mailCheck = $this->connection->prepare("SELECT `EMAIL` from student_data WHERE `email` = ?");
+			$mailCheck = $this->connection->prepare("SELECT `EMAIL` from win WHERE `email` = ?");
 			$mailCheck->bindValue(1, $email);
 			$mailCheck->execute();
 			if ($mailCheck->rowCount() > 0) {
@@ -223,7 +227,7 @@ class UserActions
 			$mail->Host = "smtp.gmail.com";
 			$mail->SMTPAuth = true;
 			$mail->Username = 'karanke.development@gmail.com';
-			$mail->Password = 'Dexter!1';
+			$mail->Password = 'yourpasswordhere';
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = '587';
 			/**

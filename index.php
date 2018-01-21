@@ -71,6 +71,31 @@ if (isset($_POST['submit'])) {
   }
 
 }
+
+
+/**
+ * -------------------------------------
+ * Block - 2 : Testing CRUD/OOP Function(s)
+ * This is working perfectly as expected
+ * ---------------------------------------
+ */
+
+ $crud = new UserActions();
+ $crud->databaseConnection('localhost','root','','windowsDB');
+
+ if($crud->isUserRegistered('yashkaranke@gmail.com')) {
+   echo 'User is registered';
+   exit();
+ }
+ else {
+  if($crud->userRegistration('yashkaranke@gmail.com','123','123')) {
+    echo 'success';
+  }
+  else {
+    echo 'failure';
+  }
+ }
+
 ?>
 
 <!DOCTYPE html>
