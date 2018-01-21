@@ -18,5 +18,5 @@ This repo cotains a collection of methods which are PDO wrappers. Following is t
  - If you want to contribute, you're welcomed, but do not touch the
    `sendAuthEmail` method, I personally look to that method.
  - You will require [smtp4dev](http://smtp4dev.codeplex.com/) for
-   testing `sendAuthEmail` method, without `Synchro's` Workaround, if
+   testing `sendAuthEmail` method, without [`Synchro's`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L233) Workaround, if
    that also fails you'll have to keep that workaround.
