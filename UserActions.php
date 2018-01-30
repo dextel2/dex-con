@@ -55,12 +55,12 @@ class UserActions
             exit();
 		}
 
-		if ($password == null) {
+		if ($password == null && empty($password)) {
             return false;
             exit();
 		}
 
-		if ($confirmPassword == null) {
+		if ($confirmPassword == null && empty($confirmPassword)) {
             return false;
             exit();
 		}
@@ -164,7 +164,6 @@ class UserActions
                 exit();
 			}
 		}
-
 		catch(Exception $e) {
 		}
 	}
@@ -218,6 +217,8 @@ class UserActions
 	/**
 	 * TODO: Send Authenticate email to the user
 	 * Currently sending only email
+	 * Allow Less secure Apps from your google Account, if using Gmail
+	 * @link : https://myaccount.google.com/lesssecureapps
 	 */
 	function sendAuthEmail($email,$mailBody) {
 		try {
@@ -227,7 +228,7 @@ class UserActions
 			$mail->Host = "smtp.gmail.com";
 			$mail->SMTPAuth = true;
 			$mail->Username = 'karanke.development@gmail.com';
-			$mail->Password = 'yourpasswordhere';
+			$mail->Password = 'Dexter!1';
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = '587';
 			/**

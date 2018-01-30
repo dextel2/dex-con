@@ -58,7 +58,7 @@
   *    echo 'User is already registered';
   *}
   *else {
-  *  echo 'User is not registered';
+  *  ecx`ho 'User is not registered';
   *}
 */
 
@@ -77,7 +77,6 @@ if (isset($_POST['submit'])) {
   else {
     $Message = "Invalid Email Address";
   }
-
 }
 
 
