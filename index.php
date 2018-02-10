@@ -20,9 +20,10 @@
  */
 
   $User = new UserActions;
-  $User->databaseConnection('localhost','root','','admission2018');
-  $email='dex.papa@gmail.com';
+  //$User->databaseConnection('localhost','root','','admission2018');
+  $email='16564017@nuv.ac.in';
 
+  echo $User->checkNUVEmail($email);
 
 /*  if ($User->isValidEmail($email)) {
     if ($User->isUserRegistered($email)) {

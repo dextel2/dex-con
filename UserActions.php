@@ -267,6 +267,26 @@ class UserActions
 
 	}
 
+
+	/**
+	 * 
+	 * Function to check Email address is valid NUV email address
+	 * Ex : 16564017@nuv.ac.in
+	 * Here the charaters before @ doesnt matter,
+	 * This function checks if the domain name matches nuv.ac.in
+	 * @author Yash Karanke
+	 * 
+	 */
+	function checkNUVEmail($email) {
+		$regEX = "/([a-zA-Z0-9_]+)([\.{1}_])?([a-zA-Z0-9_]+)\@nuv([\.])ac([\.])in/";
+		if (preg_match($regEX, $email)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	/**
 	 * Debug Function
 	 * This function will connect to database and check if the query is working or not
