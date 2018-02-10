@@ -10,7 +10,8 @@ This repo cotains a collection of methods which are PDO wrappers. Following is t
  - [`isUserActive($email)`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L172)
  - [`userLogin($email, $password)`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L197)
  - [`sendAuthEmail($email,$mailBody)`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L222) -- Very sensitive method
- - [`debugging()`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L269)
+ - [`debugging()`](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L294)
+ - [`checkNUVEmail($email`)](https://github.com/dextel2/dex-con/blob/master/UserActions.php#L280)
 
  ## Instructions
 
