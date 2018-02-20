@@ -206,11 +206,13 @@ class UserActions
 			}
 			else {
 				return false;
+				exit();
 			}
 		}
 
 		catch(Exception $e) {
 			return false;
+			exit();
 		}
 	}
 
@@ -264,7 +266,6 @@ class UserActions
 		catch (Exception $e) {
 			return $mail->ErrorInfo;
 		}
-
 	}
 
 
@@ -275,7 +276,7 @@ class UserActions
 	 * Here the charaters before @ doesnt matter,
 	 * This function checks if the domain name matches nuv.ac.in
 	 * @author Yash Karanke
-	 * 
+	 * @link https://regex101.com/r/DX0HRW/3/codegen Code Generator for all Major languages
 	 */
 	function checkNUVEmail($email) {
 		$regEX = "/([a-zA-Z0-9_]+)([\.{1}_])?([a-zA-Z0-9_]+)\@nuv([\.])ac([\.])in/";
@@ -284,6 +285,7 @@ class UserActions
 		}
 		else {
 			return false;
+			exit();	
 		}
 	}
 
@@ -291,10 +293,15 @@ class UserActions
 	 * Debug Function
 	 * This function will connect to database and check if the query is working or not
 	 */
-	function debugging()
-	{
+	function debugging() {
 		$result = $this->connection->prepare("SELECT * FROM admins");
 		$result->execute();
 		return $result->fetchAll();
+	}
+
+	function dummyInsert($insert) {
+		$result = $this->connection->prepare($insert);
+		$result->execute();
+		return true;
 	}
 }
