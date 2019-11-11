@@ -17,16 +17,13 @@ require 'PHPMailer/src/SMTP.php';
  * This class also has methods which are not being used,
  * I am keeping those methods because they might be useful in future
  */
-class UserActions
-
-{
+class UserActions {
 	var $connection = false;
 	/**
 	 * Simple method to connect with the databse
 	 * This method is simple to connect yet hard to implement
 	 */
-	function databaseConnection($databaseHost, $databaseUsername, $databasePassword, $databaseName)
-	{
+	function databaseConnection($databaseHost, $databaseUsername, $databasePassword, $databaseName {
 		try {
 			$this->connection = new PDO("mysql:host=$databaseHost;dbname=$databaseName;", $databaseUsername, $databasePassword);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -48,42 +45,38 @@ class UserActions
 	 * Right now the function is in pilot stage to test the validations
 	 * TODO : Validate EMAIL first
 	 */
-	function userRegistration($email, $password, $confirmPassword)
-	{
+	function userRegistration($email, $password, $confirmPassword) {
 		if ($email == null && empty($email)) {
             return false;
             exit();
-		}
+	}
 
-		if ($password == null && empty($password)) {
+	if ($password == null && empty($password)) {
             return false;
             exit();
-		}
+	}
 
-		if ($confirmPassword == null && empty($confirmPassword)) {
+	if ($confirmPassword == null && empty($confirmPassword)) {
             return false;
             exit();
-		}
+	}
 
-		if ($email != null && $password != null && $confirmPassword != null) {
-
+	if ($email != null && $password != null && $confirmPassword != null) {
 			// Checking if email is valid or not
-
 			if ($password == $confirmPassword) {
 				/**
 				 * dependency isUserRegistered()
 				 * Hash password here an run insert query
 				 * insert is working properly
-                 * TODO: Run insert query here
+                 		* TODO: Run insert query here
 				 */
-
 				$registerData = $this->connection->prepare("INSERT INTO `win` VALUES ('$email','$password')");
 				$registerData->execute();
 				return true;
 			}
 			else {
-                return false;
-                //Password and confirm password must match
+                		return false;
+                		//Password and confirm password must match
 				exit();
 			}
 		}
@@ -93,15 +86,12 @@ class UserActions
 	 * A direct copy paste code from Stackoverflow
 	 * @author unbreak
 	 */
-	function isValidEmail($email)
-	{
+	function isValidEmail($email) {
 
 		// First, we check that there's one @ symbol, and that the lengths are right
 
 		if (!preg_match("/^[^@]{1,64}@[^@]{1,255}$/", $email)) {
-
 			// Email invalid because wrong number of characters in one section, or wrong number of @ symbols.
-
 			return false;
 		}
 
@@ -127,7 +117,6 @@ class UserActions
 				}
 			}
 		}
-
 		return true;
     }
     /**
@@ -143,27 +132,26 @@ class UserActions
 	/**
 	 * This functions checks in the database if the user is already registered with
 	 * same email id
-     * This function is working perfectly fine, It requires databaseConnection() to be initialized
-     * DO NOT ATTEMPT TO UPDATE THIS FUNCTION
+     	 * This function is working perfectly fine, It requires databaseConnection() to be initialized
+     	 * DO NOT ATTEMPT TO UPDATE THIS FUNCTION
 	 */
-	function isUserRegistered($email)
-	{
+	function isUserRegistered($email) {
 		try {
-            if($email==null) {
-                return false;
-                exit();
-            }
-			$mailCheck = $this->connection->prepare("SELECT `EMAIL` from win WHERE `email` = ?");
-			$mailCheck->bindValue(1, $email);
-			$mailCheck->execute();
-			if ($mailCheck->rowCount() > 0) {
-				return true;
-			}
-			else {
-                return false;
-                exit();
-			}
+            		if($email==null) {
+                	return false;
+                	exit();
 		}
+		$mailCheck = $this->connection->prepare("SELECT `EMAIL` from win WHERE `email` = ?");
+		$mailCheck->bindValue(1, $email);
+		$mailCheck->execute();
+		if ($mailCheck->rowCount() > 0) {
+			return true;
+		}
+		else {
+                	return false;
+                	exit();
+		}
+	}
 		catch(Exception $e) {
 		}
 	}
@@ -172,8 +160,7 @@ class UserActions
 	 * Function to check if the user is active or not
 	 * If user is active then only user will be allowed to login.
 	 */
-	function isUserActive($email)
-	{
+	function isUserActive($email) {
 		try {
 			$userCheck = $this->connection->prepare("SELECT `EMAIL`,`isActive` from student_data WHERE `EMAIL` = ? AND `isActive` = 1");
 			$userCheck->bindValue(1, $email);
@@ -193,8 +180,7 @@ class UserActions
 	 * This function checks if the email and password are correct or not
 	 * If the credentials are correct it will login the user
 	 */
-	function userLogin($email, $password)
-	{
+	function userLogin($email, $password) {
 		try {
 			$result = $this->connection->prepare("SELECT * FROM admins WHERE email=? AND password=?");
 			$result->bindParam(1, $email);
@@ -270,7 +256,6 @@ class UserActions
 
 
 	/**
-	 * 
 	 * Function to check Email address is valid NUV email address
 	 * Ex : 16564017@nuv.ac.in
 	 * Here the charaters before @ doesnt matter,
