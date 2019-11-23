@@ -23,7 +23,7 @@ class UserActions {
 	 * Simple method to connect with the databse
 	 * This method is simple to connect yet hard to implement
 	 */
-	function databaseConnection($databaseHost, $databaseUsername, $databasePassword, $databaseName {
+	function databaseConnection($databaseHost, $databaseUsername, $databasePassword, $databaseName) {
 		try {
 			$this->connection = new PDO("mysql:host=$databaseHost;dbname=$databaseName;", $databaseUsername, $databasePassword);
 			$this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
