@@ -216,7 +216,7 @@ class UserActions {
 			$mail->Host = "smtp.gmail.com";
 			$mail->SMTPAuth = true;
 			$mail->Username = 'karanke.development@gmail.com';
-			$mail->Password = 'Dexter!1';
+			$mail->Password = 'randompassworfd';
 			$mail->SMTPSecure = 'tls';
 			$mail->Port = '587';
 			/**
