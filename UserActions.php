@@ -90,7 +90,7 @@ class UserActions {
 
 		// First, we check that there's one @ symbol, and that the lengths are right
 
-		if (!preg_match("/^[^@]{1,64}@[^@]{1,255}$/", $email)) {
+		if (!preg_match("/^[^@]{1,64}@[a-zA-z0-9].{1,255}$/", $email)) {
 			// Email invalid because wrong number of characters in one section, or wrong number of @ symbols.
 			return false;
 		}
